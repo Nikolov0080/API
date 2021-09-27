@@ -1,14 +1,25 @@
 #!/usr/bin/env node
-const { DB_CONNECTION } = require('../mongo/connection')
+const { DB_CONNECTION } = require('../mongo/connection');
+const cloudinary = require("cloudinary").v2;
+const bodyParser = require("body-parser")
 DB_CONNECTION.on('error', console.error.bind(console, 'MongoDB connection error:'))
 /**
  * Module dependencies.
  */
 
+// cloudinary config 
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+  secure: true
+})
+
 var app = require('../app');
 var debug = require('debug')('api:server');
 var http = require('http');
-
+app.use(bodyParser.json());
 /**
  * Get port from environment and store in Express.
  */

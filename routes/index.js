@@ -1,12 +1,14 @@
-var express = require('express');
+const express = require('express');
 const { saveImage } = require('../controllers/POST/postImage');
-var router = express.Router();
+const router = express.Router();
+const multer = require('multer');
+const { upload } = require('../controllers/Cloudinary/multer');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Images API' });
 });
 
-router.post("/postImage", saveImage)
+router.post("/postImage", upload.single("image"), saveImage)
 
 module.exports = router;
