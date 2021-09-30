@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\controllers",
+    "\\controllers\\Cloudinary",
+    "\\controllers\\GET",
+    "\\controllers\\POST"
+  ],
+  "SelectedNode": "\\controllers\\GET\\getImages.js",
+  "PreviewInSolutionExplorer": false
+}

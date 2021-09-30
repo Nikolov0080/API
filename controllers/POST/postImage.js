@@ -1,30 +1,36 @@
-const saveImageSchema = require('../../models/postImageSchema');
+const saveImageSchema = require('../../models/imageSchema');
 const { ImageUpload } = require('../Cloudinary/uploadImage');
-const { upload } = require('../Cloudinary/multer');
 
 module.exports.saveImage = async (req, res, next) => {
 
-    const { path, filename, size } = req.file
-    const { creator, location, title } = req.body
-    const responseData = await ImageUpload(path, filename, size);
+    try {
+        const { path, filename, size } = req.file
+        const { creator, location, title } = req.body
+        const responseData = await ImageUpload(path, filename, size);
+        const dateCreated = new Date();
 
-    const {
-        created_at: createdAt,
-        url,
-        secure_url: secureUrl,
+        const {
+            created_at: createdAt,
+            url,
+            secure_url: secureUrl,
+        } = responseData;
 
-    } = responseData;
+        const metaData = {
+            creator,
+            location,
+            title,
+            createdAt,
+            url,
+            secureUrl,
+            dateCreated
+        }
 
-    const metaData = {
-        creator,
-        location,
-        title,
-        createdAt,
-        url,
-        secureUrl
+        const response = await saveImageSchema.create(metaData)
+
+        res.send(response)
+
+    } catch (error) {
+        res.status(500).send(error)
     }
 
-    const response = await saveImageSchema.create(metaData)
-
-    res.send(response)
 }

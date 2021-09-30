@@ -20,6 +20,9 @@ const imageSchema = new Schema({
     },
     secureUrl: {
         type: String
+    },
+    dateCreated: {
+        type: Date
     }
 });
 const model = new Model("Images", imageSchema);
