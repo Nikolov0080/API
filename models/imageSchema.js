@@ -6,7 +6,7 @@ const imageSchema = new Schema({
     creator: {
         type: String
     },
-    location: {
+    category: {
         type: String
     },
     title: {

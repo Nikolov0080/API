@@ -3,11 +3,19 @@ const imageSchema = require('../../models/imageSchema')
 module.exports.getImages = (req, res) => {
 
     const {
-        limit
+        limit,
+        category,
+        createdAt
     } = req.query
 
+    const filters = {};
+
+    if (category) filters.category = category
+    if (createdAt) filters.category = createdAt
+    console.log(332123123234)
+
     imageSchema
-        .find({}, images)
+        .find(filters, images)
         .limit(Number(limit) || 10)
 
     // add query search in collection

@@ -5,7 +5,7 @@ module.exports.saveImage = async (req, res, next) => {
 
     try {
         const { path, filename, size } = req.file
-        const { creator, location, title } = req.body
+        const { creator, category, title } = req.body
         const responseData = await ImageUpload(path, filename, size);
         const dateCreated = new Date();
 
@@ -17,7 +17,7 @@ module.exports.saveImage = async (req, res, next) => {
 
         const metaData = {
             creator,
-            location,
+            category,
             title,
             createdAt,
             url,
